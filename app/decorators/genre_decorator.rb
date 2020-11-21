@@ -1,4 +1,4 @@
-class GenreDecorator < Draper::Decorator
+class GenreDecorator < ApplicationDecorator
   delegate_all
   decorates_association :movies
 

@@ -11,6 +11,14 @@ Place where we examine our candidates
 Before pairing:
  - Clone repo `git clone git@github.com:netguru-training/pairguru.git`
  - run `bundle install` within app directory
+    - Note on Big Sur:
+      ```
+      Xcode 12 Beta Command Line Tools now sets -Werror=implicit-function-declaration by default
+      ````
+      Install FFI gem with:
+      ```
+      gem install ffi -v '1.9.23' --source 'https://rubygems.org/'  --  --with-cflags=-Wno-implicit-function-declaration
+      ```
  - run `rake db:setup` This will create database, run migrations and fill db with seeds
  - run `rails s` :boom:
 
@@ -38,7 +46,7 @@ We would like to share our movies via api.
 ### Task 3 - long running tasks
 We have two tasks that run too long and users leave our page frustrated:
 a) emailing details about movie (button in movie show)
-b) emailing movies csv export (in navigation) 
+b) emailing movies csv export (in navigation)
 - update application so user doesn't have to wait for page load and still get emails
 
 ### Task 4 - brackets validation
@@ -57,7 +65,7 @@ Our users want to comment on movies.
 - one user should be allowed to leave only one comment to the movie (can create another only if he deletes previous one)
 
 ### Task 6 - sql query - dependent on 5
-We want to reward our users for commenting movies. 
+We want to reward our users for commenting movies.
 - create page with top commenters this week.
 - display 10 users that have the most comments in last week (from 7 days ago to now)
 - don't spam database with many queries in one pageview
@@ -81,5 +89,3 @@ There is private [pairguru](https://github.com/netguru/pairguru) repository. In 
   * Push branch to [pairguru](https://github.com/netguru/pairguru). It will be propagated to public repo
   * Specify in this task description that it should be solved on this branch
 * If you change something in the repo please try to update ruby/rails/gems versions to the latest.
-
-
