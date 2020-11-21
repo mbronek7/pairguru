@@ -23,7 +23,6 @@ module Api
         page = params[:page] || 1
         render_json(serializer, Movie.all.page(page))
       end
-
     end
   end
 end

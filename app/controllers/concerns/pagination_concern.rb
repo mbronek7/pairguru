@@ -4,7 +4,7 @@ module PaginationConcern
   private
 
   def render_json(serializer, obj, options = {})
-    if obj.class.name == 'ActiveRecord::Relation'
+    if obj.class.name == "ActiveRecord::Relation"
       return render_collection(serializer, obj, options)
     end
 
