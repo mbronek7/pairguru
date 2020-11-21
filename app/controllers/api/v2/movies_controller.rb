@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V2
     class MoviesController < Api::BaseController
       def index
         get_movies
@@ -12,7 +12,7 @@ module Api
       private
 
       def serializer
-        Api::V1::MovieSerializer
+        Api::V2::MovieSerializer
       end
 
       def movie
