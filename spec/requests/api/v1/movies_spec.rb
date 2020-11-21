@@ -13,7 +13,6 @@ RSpec.describe "Movies API V1" do
       end
 
       it "returns movie details" do
-        json_response = JSON.parse(response.body)
         expect(json_response["data"]["attributes"]["id"]).to eq(movie.id)
         expect(json_response["data"]["attributes"]["title"]).to eq(movie.title)
       end
@@ -27,7 +26,6 @@ RSpec.describe "Movies API V1" do
       end
 
       it "returns error paylod" do
-        json_response = JSON.parse(response.body)
         expect(json_response["title"]).to eq(I18n.t("errors.not_found.title"))
         expect(json_response["detail"]).to eq(I18n.t("errors.not_found.detail"))
       end
@@ -46,10 +44,9 @@ RSpec.describe "Movies API V1" do
     end
 
     it "returns an movie details" do
-      data = JSON.parse(response.body)["data"]
-      expect(data.size).to eq(5)
+      expect(json_response["data"].size).to eq(5)
 
-      first_movie = data[0]
+      first_movie = json_response["data"][0]
       expect(first_movie["attributes"]["id"]).to eq(movies.first.id)
       expect(first_movie["attributes"]["title"]).to eq(movies.first.title)
     end
