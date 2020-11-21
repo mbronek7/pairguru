@@ -18,4 +18,5 @@
 # Ignore vendor directory.
 /vendor
 
+.byebug_history
 coverage
