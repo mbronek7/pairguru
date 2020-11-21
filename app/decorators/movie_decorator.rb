@@ -2,8 +2,20 @@ class MovieDecorator < Draper::Decorator
   delegate_all
 
   def cover
-    "http://lorempixel.com/100/150/" +
-      %w[abstract nightlife transport].sample +
-      "?a=" + SecureRandom.uuid
+    Pairguru::Base::ENDPOINT + attributes[:poster]
+  end
+
+  def plot
+    attributes[:plot]
+  end
+
+  def rating
+    attributes[:rating]
+  end
+
+  private
+
+  def attributes
+    @attributes ||= Pairguru::Resources::Movies.build.get(object.title)[:attributes]
   end
 end
