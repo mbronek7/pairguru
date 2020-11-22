@@ -14,6 +14,7 @@ gem "kaminari"
 gem "oj"
 gem "rest-client"
 gem "sass-rails"
+gem "sidekiq"
 gem "sqlite3"
 gem "uglifier"
 
