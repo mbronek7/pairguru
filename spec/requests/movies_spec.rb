@@ -8,6 +8,41 @@ describe "Movies requests", type: :request do
     end
   end
 
+  describe "comments section" do
+    let!(:movie) { create(:movie, :with_comments) }
+
+    before :each do
+      allow_any_instance_of(MovieDecorator)
+        .to receive_messages(cover: "foo.jpg", plot: "plot", rating: 5.5)
+    end
+
+    it "displays all comments" do
+      visit "/movies/#{movie.id}"
+      expect(page).to have_selector("h1", text: "Comments")
+      expect(page).to have_selector("tr.comment", count: movie.comments.count)
+    end
+
+    context "when user is signed in" do
+      let!(:user) { create(:user) }
+
+      before :each do
+        sign_in user
+      end
+
+      it "has comments form" do
+        visit "/movies/#{movie.id}"
+        expect(page).to have_selector(".comment-form")
+      end
+    end
+
+    context "when user is not signed in" do
+      it "has not got comments form" do
+        visit "/movies/#{movie.id}"
+        expect(page).not_to have_selector(".comment-form")
+      end
+    end
+  end
+
   describe "movies export and mailer" do
     let(:movie) { create(:movie) }
     context "when user is not logged in" do
@@ -24,7 +59,7 @@ describe "Movies requests", type: :request do
       end
     end
 
-    context "when user id signed in" do
+    context "when user is signed in" do
       let!(:user) { create(:user) }
 
       before(:example) do

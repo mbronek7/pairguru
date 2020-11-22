@@ -13,8 +13,8 @@ describe Comment do
     expect(subject).to be_valid
   end
 
-  it 'user can only add one comment to movie' do
-  	create(:comment, user: user, movie: movie)
+  it "user can only add one comment to movie" do
+    create(:comment, user: user, movie: movie)
     expect do
       create(:comment, user: user, movie: movie)
     end.to raise_error(ActiveRecord::RecordInvalid)

@@ -1,0 +1,13 @@
+.comments.text-center
+  %table.table.table-striped
+    %tbody
+      - comments.each do |comment|
+        %tr.comment
+          %td= comment.body
+          - if user_signed_in? && current_user.id == comment.user_id
+            %td= link_to 'Destroy', movie_comment_path(@movie, comment), method: :delete, data: { confirm: 'Are you sure?' }
+      - if user_signed_in?
+        .comment-form
+          = form_for [@movie, @movie.comments.build] do |f|
+            = f.text_field :body
+            = f.submit "Comment"
