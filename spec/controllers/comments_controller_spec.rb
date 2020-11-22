@@ -80,5 +80,14 @@ describe CommentsController, type: :controller do
         end
       end
     end
+    context "when user is not signed in" do
+      let!(:comment) { create(:comment) }
+      let(:movie) { create(:movie) }
+
+      it "redirects to sign in page" do
+        delete :destroy, params: { id: comment.id, movie_id: comment.movie.id }
+        response.should redirect_to new_user_session_path
+      end
+    end
   end
 end
